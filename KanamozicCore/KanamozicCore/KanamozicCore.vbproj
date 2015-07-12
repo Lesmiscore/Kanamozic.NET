@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{389257A9-59D4-489A-9754-5CFF81A44DAB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>KanamozicCore</RootNamespace>
+    <RootNamespace>Kanamozic</RootNamespace>
     <AssemblyName>KanamozicCore</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
@@ -62,7 +62,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KanamozicCore.vb" />
+    <Compile Include="Kanamozic.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
