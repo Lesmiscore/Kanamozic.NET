@@ -1,4 +1,6 @@
-﻿Public Class Kanamozic
+﻿Imports System.Text
+
+Public Class Kanamozic
     Public Const ConvertEngLetters As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
     Public Const ConvertJpnLetters As String = "あいうえおかきくけこさしすせそたちつてとなにぬねのはアイウエオカキクケコサシスセソタチツテトナニヌネノハんをわろれるりらよゆンワ"
     Public Const FullJpnLetters As String = "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
@@ -13,13 +15,13 @@
 
     Public Shared Function Encode(s As String, key As SByte) As String
         If IsOnlyKanas(s) Then
-            Return "が"
+            Return "が" & EncodeKana(s, key)
         Else
-            Return "ぎ"
+            Return "ぎ" & EncodeBinary(s, key)
         End If
     End Function
     Private Shared Function EncodeKana(s As String, key As SByte) As String
-        Dim buf = New Char(s.Length) {}
+        Dim buf = New Char(s.Length - 1) {}
         For i = 0 To s.Length - 1
             Dim value As Char = s(i)
             Dim offset = FullJpnLetters.IndexOf(value)
@@ -28,5 +30,29 @@
         Next
         Return buf
     End Function
+    Private Shared Function EncodeBinary(s As String, key As SByte) As String
+        s = EncodeBase64(s)
+        Dim buf = New Char(s.Length - 1) {}
+        For i = 0 To s.Length - 1
+            Dim value As Char = s(i)
+            Dim offset = ConvertEngLetters.IndexOf(value)
+            Dim requiredOffset = (offset + key) Mod ConvertJpnLetters.Length
+            buf(i) = ConvertJpnLetters(requiredOffset)
+        Next
+        Return buf
+    End Function
 
+    Private Shared Function ToByteArray(s As String) As Byte()
+        Return Encoding.UTF8.GetBytes(s)
+    End Function
+    Private Shared Function ToString(b As Byte()) As String
+        Return Encoding.UTF8.GetString(b)
+    End Function
+
+    Private Shared Function EncodeBase64(d As String) As String
+        Return Convert.ToBase64String(ToByteArray(d), Base64FormattingOptions.None).TrimEnd("=")
+    End Function
+    Private Shared Function DecodeBase64(d As String) As String
+        Return ToString(Convert.FromBase64String(d))
+    End Function
 End Class
