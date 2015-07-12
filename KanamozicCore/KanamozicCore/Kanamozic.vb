@@ -4,7 +4,7 @@ Public Class Kanamozic
     Public Const ConvertEngLetters As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
     Public Const ConvertJpnLetters As String = "あいうえおかきくけこさしすせそたちつてとなにぬねのはアイウエオカキクケコサシスセソタチツテトナニヌネノハんをわろれるりらよゆンワ"
     Public Const FullJpnLetters As String = "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
-    Public Shared Function IsOnlyKanas(s As String) As Boolean
+    Private Shared Function IsOnlyKanas(s As String) As Boolean
         For Each i In s
             If Not FullJpnLetters.Contains(i) Then
                 Return False
