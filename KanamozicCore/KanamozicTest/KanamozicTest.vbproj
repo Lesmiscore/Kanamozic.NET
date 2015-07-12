@@ -116,6 +116,12 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KanamozicCore\KanamozicCore.vbproj">
+      <Project>{389257a9-59d4-489a-9754-5cff81a44dab}</Project>
+      <Name>KanamozicCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
